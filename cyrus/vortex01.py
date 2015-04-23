@@ -1,4 +1,4 @@
-#!/bin/usr/python3
+#!/usr/bin/env python
 from socket import *
 from struct import *
 
@@ -10,12 +10,12 @@ if __name__ == '__main__':
     sock.connect((host, port))
 
     sum = 0
-    
+
     for i in range(4):
         data = sock.recv(4)
         sum += unpack("<I", data)[0]
 
     sock.send(pack("<I", (sum & 0xFFFFFFFF)))
     print(sock.recv(1024))
-    
+
     sock.close()
